@@ -1,0 +1,213 @@
+/* Universal CSS - Engloba todos os elementos */
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+</style>
+
+/* CSS para grupo */
+<style>
+    body, p, h1, h2, h3 {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        color: #333;
+    }
+</style>
+
+/* CSS para classe */
+<style>
+    .destaque {
+        color: red;
+        font-weight: bold;
+    }  
+</style>
+
+/* CSS para ID */
+<style>
+    #titulo {
+        color: blue;
+        text-align: center;
+    }
+</style>
+
+/* CSS para elemento DESCENDENTE */
+<style>
+    div p {
+        color: green;
+        font-size: 16px;
+    }
+</style>
+
+/* CSS para elemento FILHO */
+<style>
+    div > p {
+        color: orange;
+        font-size: 18px;
+    }   
+</style>
+<body>
+    <h1 id="titulo">Título Principal</h1>
+    <p class="destaque">Este é um parágrafo em destaque.</p>
+    <div>
+        <p>Parágrafo dentro de uma div (descendente).</p>
+        <p>Outro parágrafo dentro da mesma div (filho).</p>
+    </div>
+    <p>Parágrafo fora da div.</p>
+</body>
+
+/* CSS para elemento FILHO - outro exemplo */
+<style>
+    ul > li {
+        color: purple;
+        font-size: 14px;
+    }
+</style>
+<body>
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <div>
+            <li>Item 3 (filho da div, não afetado pela regra de li)</li>
+        </div>
+        <li>Item 3</li>
+    </ul>
+</body>
+
+/* CSS para elemento IRMÃO */
+<style>
+    h2 + p {
+        color: brown;
+        font-size: 16px;
+    }
+</style>
+<body>
+    <h2>Subtítulo</h2>
+    <p>Parágrafo imediatamente após o subtítulo (irmão).</p>
+    <p>Outro parágrafo, não afetado pela regra de irmão.</p>
+</body>
+
+/* CSS para atributo - [atributo] */
+<style>
+    input[required] {
+        border: 2px solid red;
+    }
+</style>
+<body>
+    <input type="text" required placeholder="Campo obrigatório">
+    <input type="text" placeholder="Campo opcional">
+</body>
+
+/* CSS para atributo + valor - [atributo="valor"] */
+<style>
+    a[target="_blank"] {
+        color: teal;
+        text-decoration: underline;
+    }
+</style>
+<body>
+    <a href="https://www.example.com" target="_blank">Link para exemplo.com</a>
+    <a href="https://www.example.com">Link para exemplo.com sem target</a>  
+</body>
+    
+/* CSS para pseudo-classes */
+/* HOVER - Aplica estilos quando o usuário passa o mouse sobre um elemento */
+<style>
+    a:hover {
+        color: blue;
+        text-decoration: underline;
+    }
+</style>
+<body>
+    <a href="https://www.example.com">Passe o mouse sobre este link</a>
+</body>
+
+/* ACTIVE - Aplica estilos quando um elemento está sendo clicado */
+<style>
+    button:active {
+        background-color: yellow;
+        color: red;
+    }
+</style>
+<body>
+    <button>Clique aqui</button>
+</body>
+
+/* FOCUS - Aplica estilos quando um elemento recebe foco (ex: ao clicar ou usar tab) */
+<style>
+    input:focus {
+        border-color: green;
+        outline: none;
+    }
+</style>
+<body>
+    <input type="text" placeholder="Clique ou use tab para focar">
+</body>
+
+/* :nth-child() - Seleciona o elemento que é o n-ésimo filho de seu pai */
+<style>
+    ul li:nth-child(2) {
+        color: blue;
+    }
+</style>
+<body>
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+</body>
+
+/* :nth-child */
+<style>
+    ul li:nth-child(odd) {
+        background-color: #f0f0f0;
+    }
+    ul li:nth-child(even) {
+        background-color: #e0e0e0;
+    }
+</style>
+<body>
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+        <li>Item 4</li>
+    </ul>
+</body>
+
+/* CSS para pseudo-elementos */
+/* ::before - Insere conteúdo antes do elemento */
+<style>
+    p::before {
+        content: "Antes: ";
+        font-weight: bold;
+    }
+</style>
+<body>
+    <p>Este é um parágrafo.</p>
+</body>
+
+/* ::after - Insere conteúdo depois do elemento */
+<style>
+    p::after {
+        content: " Depois.";
+        font-style: italic;
+    }
+</style>
+<body>
+    <p>Este é um parágrafo.</p>
+</body>
+
+/* ::first-letter - Aplica estilos à primeira letra de um elemento */
+<style>
+    p::first-letter {
+        font-size: 200%;
+        color: red;
+    }
+</style>
+<body>
+    <p>Este é um parágrafo.</p>
+</body>
+
