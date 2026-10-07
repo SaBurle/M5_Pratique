@@ -4,104 +4,270 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guia de comandos Git</title>
+    <style>
+        :root {
+            --bg: #f6f7fb;
+            --card: #ffffff;
+            --text: #1f2933;
+            --muted: #5f6b7a;
+            --accent: #5b5bd6;
+            --border: #e4e7ec;
+            --code-bg: #1e2430;
+            --code-text: #e6edf3;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0f1218;
+                --card: #171b23;
+                --text: #e6e9ef;
+                --muted: #9aa4b2;
+                --accent: #7c7ff2;
+                --border: #262c38;
+                --code-bg: #0b0e13;
+            }
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        main {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 48px 16px;
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            font-size: 2rem;
+        }
+
+        h1 span {
+            color: var(--accent);
+        }
+
+        .subtitulo {
+            margin: 0 0 32px;
+            color: var(--muted);
+        }
+
+        /* Etapas (1, 2, 3...) */
+        main > ol {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            counter-reset: etapa;
+        }
+
+        main > ol > li {
+            counter-increment: etapa;
+            position: relative;
+            margin-bottom: 16px;
+            padding: 20px 24px 20px 72px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        main > ol > li::before {
+            content: counter(etapa);
+            position: absolute;
+            top: 18px;
+            left: 20px;
+            width: 36px;
+            height: 36px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        main > ol > li > * {
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        main > ol > li > p {
+            color: var(--muted);
+        }
+
+        /* Passos (7.1, 7.2...) */
+        main > ol > li > ol {
+            list-style: none;
+            margin: 12px 0 0;
+            padding: 0;
+            counter-reset: passo;
+        }
+
+        main > ol > li > ol > li {
+            counter-increment: passo;
+            position: relative;
+            margin: 12px 0;
+            padding-left: 44px;
+        }
+
+        main > ol > li > ol > li::before {
+            content: counter(etapa) "." counter(passo);
+            position: absolute;
+            top: 1px;
+            left: 0;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        ul {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+
+        ul li::marker {
+            color: var(--accent);
+        }
+
+        /* Comandos */
+        pre {
+            margin: 8px 0;
+            padding: 10px 14px;
+            overflow-x: auto;
+            background: var(--code-bg);
+            color: var(--code-text);
+            border-left: 3px solid var(--accent);
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        code {
+            font-family: "Cascadia Code", Consolas, "Courier New", monospace;
+        }
+
+        pre code::before {
+            content: "$ ";
+            color: #7d8590;
+        }
+
+        @media (max-width: 600px) {
+            main > ol > li {
+                padding: 16px 16px 16px 60px;
+            }
+
+            main > ol > li::before {
+                left: 14px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <ol>
-        <li>Configuração inicial (apenas uma vez por máquina)
-            <ol>
-                <li>Configure seu nome e e-mail.
-                    <pre><code>git config --global user.name "SaBurle"</code></pre>
-                    <pre><code>git config --global user.email "seu.email@email.com"</code></pre>
-                </li>
-            </ol>
-        </li>
-        <li>Clonando ou iniciando um repositório
-            <ol>
-                <li>Clonar um repositório remoto existente.
-                    <pre><code>git clone https://github.com/usuario/repositorio.git</code></pre>
-                    <pre><code>cd repositorio</code></pre>
-                </li>
-                <li>Se ainda não existe um repositório remoto:
-                    <pre><code>mkdir meu-projeto</code></pre>
-                    <pre><code>cd meu-projeto</code></pre>
-                    <pre><code>git init</code></pre>
-                    <pre><code>git remote add origin https://github.com/usuario/meu-projeto.git</code></pre>
-                </li>
-            </ol>
-        </li>
-        <li>Criando ou alternando para uma branch
-            <ol>
-                <li>Crie uma nova branch para as suas implementações (boa prática).
-                    <pre><code>git checkout -b minha-branch</code></pre>
-                </li>
-                <li>Ou alterne para uma branch que já existe.
-                    <pre><code>git checkout main</code></pre>
-                </li>
-            </ol>
-        </li>
-        <li>Fazendo modificações no código
-            <ol>
-                <li>Realize as implementações necessárias no projeto.</li>
-            </ol>
-        </li>
-        <li>Adicione as alterações ao "stage" e faça um commit
-            <p>O "stage" é uma área temporária onde você prepara as alterações antes de fazer o commit.</p>
-            <ol>
-                <li>Para adicionar um arquivo específico:
-                    <pre><code>git add nome-do-arquivo</code></pre>
-                </li>
-                <li>Para adicionar todos os arquivos modificados:
-                    <pre><code>git add .</code></pre>
-                </li>
-                <li>Crie um commit para registrar suas mudanças.
-                    <pre><code>git commit -m "mensagem do commit"</code></pre>
-                </li>
-            </ol>
-        </li>
-        <li>Enviando alterações para o repositório remoto
-            <ol>
-                <li>Certifique-se de que está na branch correta.
-                    <pre><code>git branch</code></pre>
-                </li>
-                <li>Envie suas alterações para o repositório remoto.
-                    <pre><code>git push origin minha-branch</code></pre>
-                </li>
-            </ol>
-        </li>
-        <li>Sincronizando alterações
-            <ol>
-                <li>Atualize sua branch local com as mudanças remotas.
-                    <pre><code>git merge</code></pre>
-                </li>
-                <li>Resolva os conflitos, se houver.
-                    <ul>
-                        <li>Edite os arquivos conflitantes.</li>
-                        <li>Após resolver os conflitos, adicione os arquivos corrigidos.
-                            <pre><code>git add nome-do-arquivo</code></pre>
-                            <pre><code>git commit -m "resolvendo conflitos"</code></pre>
-                        </li>
-                    </ul>
-                </li>
-            </ol>
-        </li>
-        <li>Determine o tipo de repositório
-            <ol>
-                <li>Se for um repositório colaborativo (envolvendo outras pessoas):
-                    <ul>
-                        <li>Abra um pull request (PR) ou merge request (MR) na plataforma do repositório remoto (GitHub, GitLab etc.) para revisão e aprovação.</li>
-                    </ul>
-                </li>
-                <li>Se for um repositório pessoal (trabalho individual):
-                    <ul>
-                        <li>Faça o merge diretamente na branch principal.
-                            <pre><code>git checkout main</code></pre>
-                            <pre><code>git merge minha-branch</code></pre>
-                            <pre><code>git push origin main</code></pre>
-                        </li>
-                    </ul>
-                </li>
-            </ol>
-        </li>
-    </ol>
+    <main>
+        <h1>Guia de comandos <span>Git</span></h1>
+        <p class="subtitulo">Passo a passo do fluxo de trabalho com Git e GitHub.</p>
+        <ol>
+            <li>Configuração inicial (apenas uma vez por máquina)
+                <ol>
+                    <li>Configure seu nome e e-mail.
+                        <pre><code>git config --global user.name "SaBurle"</code></pre>
+                        <pre><code>git config --global user.email "seu.email@email.com"</code></pre>
+                    </li>
+                </ol>
+            </li>
+            <li>Clonando ou iniciando um repositório
+                <ol>
+                    <li>Clonar um repositório remoto existente.
+                        <pre><code>git clone https://github.com/usuario/repositorio.git</code></pre>
+                        <pre><code>cd repositorio</code></pre>
+                    </li>
+                    <li>Se ainda não existe um repositório remoto:
+                        <pre><code>mkdir meu-projeto</code></pre>
+                        <pre><code>cd meu-projeto</code></pre>
+                        <pre><code>git init</code></pre>
+                        <pre><code>git remote add origin https://github.com/usuario/meu-projeto.git</code></pre>
+                    </li>
+                </ol>
+            </li>
+            <li>Criando ou alternando para uma branch
+                <ol>
+                    <li>Crie uma nova branch para as suas implementações (boa prática).
+                        <pre><code>git checkout -b minha-branch</code></pre>
+                    </li>
+                    <li>Ou alterne para uma branch que já existe.
+                        <pre><code>git checkout main</code></pre>
+                    </li>
+                </ol>
+            </li>
+            <li>Fazendo modificações no código
+                <ol>
+                    <li>Realize as implementações necessárias no projeto.</li>
+                </ol>
+            </li>
+            <li>Adicione as alterações ao "stage" e faça um commit
+                <p>O "stage" é uma área temporária onde você prepara as alterações antes de fazer o commit.</p>
+                <ol>
+                    <li>Para adicionar um arquivo específico:
+                        <pre><code>git add nome-do-arquivo</code></pre>
+                    </li>
+                    <li>Para adicionar todos os arquivos modificados:
+                        <pre><code>git add .</code></pre>
+                    </li>
+                    <li>Crie um commit para registrar suas mudanças.
+                        <pre><code>git commit -m "mensagem do commit"</code></pre>
+                    </li>
+                </ol>
+            </li>
+            <li>Enviando alterações para o repositório remoto
+                <ol>
+                    <li>Certifique-se de que está na branch correta.
+                        <pre><code>git branch</code></pre>
+                    </li>
+                    <li>Envie suas alterações para o repositório remoto.
+                        <pre><code>git push origin minha-branch</code></pre>
+                    </li>
+                </ol>
+            </li>
+            <li>Sincronizando alterações
+                <ol>
+                    <li>Atualize sua branch local com as mudanças remotas.
+                        <pre><code>git merge</code></pre>
+                    </li>
+                    <li>Resolva os conflitos, se houver.
+                        <ul>
+                            <li>Edite os arquivos conflitantes.</li>
+                            <li>Após resolver os conflitos, adicione os arquivos corrigidos.
+                                <pre><code>git add nome-do-arquivo</code></pre>
+                                <pre><code>git commit -m "resolvendo conflitos"</code></pre>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+            <li>Determine o tipo de repositório
+                <ol>
+                    <li>Se for um repositório colaborativo (envolvendo outras pessoas):
+                        <ul>
+                            <li>Abra um pull request (PR) ou merge request (MR) na plataforma do repositório remoto (GitHub, GitLab etc.) para revisão e aprovação.</li>
+                        </ul>
+                    </li>
+                    <li>Se for um repositório pessoal (trabalho individual):
+                        <ul>
+                            <li>Faça o merge diretamente na branch principal.
+                                <pre><code>git checkout main</code></pre>
+                                <pre><code>git merge minha-branch</code></pre>
+                                <pre><code>git push origin main</code></pre>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+        </ol>
+    </main>
 </body>
 </html>
